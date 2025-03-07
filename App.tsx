@@ -6,23 +6,11 @@
  */
 
 import React from 'react';
-// import RootNavigationContainer from './app/navagation';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import RootNavigationContainer from './app/navagation';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, useColorScheme, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 // 配置
 
 function App(): React.JSX.Element {
@@ -44,45 +32,20 @@ function App(): React.JSX.Element {
   const safePadding = '5%';
 
   return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView style={backgroundStyle}>
-        <View style={{ paddingRight: safePadding }}>
-          <Header />
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          123
-          {/* <RootNavigationContainer /> */}
-        </View>
-      </ScrollView>
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+          <RootNavigationContainer />
+        </SafeAreaView>
+      </View>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  container: {
+    flex: 1,
+    height: 500,
   },
 });
 

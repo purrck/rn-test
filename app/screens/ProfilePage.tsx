@@ -1,15 +1,19 @@
-import React from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import React, { useEffect } from 'react';
+
+import { View, StyleSheet, Alert, Text } from 'react-native';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
 import { StackScreenProps } from '../navigation/types';
 import AuthStore from '../stores/authStore';
 import { User } from '../types/post';
 
-const ProfileScreen = () => {
-  const navigation = useNavigation();
+const ProfilePage = ({ navigation }) => {
   const user: User = AuthStore.user;
-
+  useEffect(() => {
+    console.log('useruseruseruser,', user);
+    if (!user.username) {
+      navigation.navigate('LoginPage');
+    }
+  }, [user]); // 依赖项确保 user 变化时重新检查
   const handleLogout = () => {
     Alert.alert('确认登出', '您确定要退出当前账号吗？', [
       { text: '取消', style: 'cancel' },
@@ -19,8 +23,8 @@ const ProfileScreen = () => {
         onPress: () => {
           AuthStore.logout();
           navigation.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
+            index: 1,
+            routes: [{ name: 'LoginPage' }],
           });
         },
       },
@@ -33,7 +37,7 @@ const ProfileScreen = () => {
         <Card.Content style={styles.profileContent}>
           <Avatar.Image
             size={80}
-            source={{ uri: user?.image || 'https://i.imgur.com/TdIiU4G.png' }}
+            source={{ uri: user?.image }}
             style={styles.avatar}
           />
           <Title style={styles.name}>
@@ -49,18 +53,19 @@ const ProfileScreen = () => {
             mode="text"
             icon="information"
             style={styles.menuItem}
-            onPress={() => navigation.navigate('About')}>
+            onPress={() => console.log('about')}>
             关于我们
-          </Button>
-          <Button
-            mode="text"
-            icon="logout"
-            style={styles.menuItem}
-            onPress={handleLogout}>
-            退出登录
           </Button>
         </Card.Content>
       </Card>
+
+      <Button
+        mode="text"
+        icon="logout"
+        style={styles.menuItem}
+        onPress={handleLogout}>
+        退出登录
+      </Button>
     </View>
   );
 };
@@ -72,6 +77,9 @@ const styles = StyleSheet.create({
   },
   profileCard: {
     marginBottom: 16,
+    shadowColor: '#333',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
   },
   profileContent: {
     alignItems: 'center',
@@ -96,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default ProfilePage;

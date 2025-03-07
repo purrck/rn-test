@@ -7,7 +7,15 @@ const api = axios.create({
 
 export const AuthService = {
   login: (username: string, password: string) =>
-    api.post('/auth/login', { username, password }),
+    api.post('/auth/login', { username: 'emilys', password: 'emilyspass' }),
+  getMe: (token: string) =>
+    api.get('auth/me', {
+      /* providing accessToken in bearer */
+      method: 'GET',
+      headers: {
+        Authorization: `${'Bearer ' + token}`, // Pass JWT via Authorization header
+      },
+    }),
 };
 
 export const PostService = {

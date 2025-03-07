@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import {
   Card,
   Title,
@@ -14,12 +14,13 @@ const PostDetailPage = ({ route }) => {
   const { postId } = route.params;
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
-
+  console.log('PostDetailPage', postId);
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await PostService.getPostById(postId);
         setPost(response.data);
+        console.log('PostDetailPage---response', response);
       } catch (error) {
         console.error('Failed to fetch post:', error);
       } finally {
@@ -54,9 +55,9 @@ const PostDetailPage = ({ route }) => {
           </View>
 
           <View style={styles.reactions}>
-            <Paragraph style={styles.reactionText}>
+            {/* <Paragraph style={styles.reactionText}>
               Reactions: {post?.reactions}
-            </Paragraph>
+            </Paragraph> */}
           </View>
         </Card.Content>
       </Card>

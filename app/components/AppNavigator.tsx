@@ -1,9 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginPage';
-import PostsScreen from '../screens/PostPage';
+import PostsScreen from '../screens/PostsPage';
 import PostDetailScreen from '../screens/PostsDetailPage';
-import { RootStackParamList } from '../types/post';
+import { RootStackParamList } from '../types/navigation';
 const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => (
@@ -14,7 +14,7 @@ const AppNavigator = () => (
       component={PostsScreen}
       options={{ headerLeft: () => null }} // 禁用返回按钮
     />
-    <Stack.Screen name="PostDetail" component={PostDetailScreen} />
+    <Stack.Screen name="PostsDetailPage" component={PostDetailScreen} />
   </Stack.Navigator>
 );
 

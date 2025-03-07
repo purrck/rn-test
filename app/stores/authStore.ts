@@ -22,6 +22,9 @@ class AuthStore {
     this.user = emptyUser;
     this.isAuthenticated = false;
   }
+  checkLoginState() {
+    return this.isAuthenticated;
+  }
 }
 
 export default new AuthStore();
