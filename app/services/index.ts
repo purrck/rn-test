@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const AuthService = {
   login: (username: string, password: string) =>
-    api.post('/auth/login', { username: 'emilys', password: 'emilyspass' }),
+    api.post('/auth/login', { username, password }),
   getMe: (token: string) =>
     api.get('auth/me', {
       /* providing accessToken in bearer */

@@ -3,6 +3,7 @@ import { FlatList, ListRenderItem, StyleSheet } from 'react-native';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import { PostService } from '../services/index';
 import { Post } from '../types/post';
+import { MainTabParamList } from './.types';
 const PostsScreen = ({ navigation }) => {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
